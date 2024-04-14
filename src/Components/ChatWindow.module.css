@@ -1,0 +1,41 @@
+.chatWindow {
+  width: 85%;
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    rgba(215, 199, 244, 0.2) 0%,
+    rgba(151, 133, 186, 0.2) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.conversation {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+.questions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-bottom: 30px;
+}
+
+.inputArea {
+  width: 846.09px;
+  height: 41px;
+  top: 777px;
+  left: 222px;
+  border-radius: 5px;
+  border: 1px solid #00000073;
+}
+
+.head {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32.17px;
+  text-align: left;
+  color: #9785ba;
+}
