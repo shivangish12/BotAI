@@ -20,10 +20,11 @@
   justify-content: center;
   gap: 20px;
   padding-bottom: 30px;
+  width: 100%;
 }
 
 .inputArea {
-  width: 846.09px;
+  width: 80%;
   height: 41px;
   top: 777px;
   left: 222px;

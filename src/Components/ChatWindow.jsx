@@ -1,9 +1,9 @@
-// ChatWindow.jsx
 import React, { useState } from "react";
 import styles from "./ChatWindow.module.css";
 import Button from "./Button";
 import chatData from "./chatData";
 import FeedbackModal from "./FeedbackModal";
+import Card from "./Card"; // Import the Card component
 
 const ChatWindow = ({ onSaveConversation }) => {
   const [message, setMessage] = useState("");
@@ -14,12 +14,25 @@ const ChatWindow = ({ onSaveConversation }) => {
 
   const handleSendMessage = () => {
     if (!message.trim()) return;
-    const newMessage = { text: message, fromUser: true };
+
+    const originalMessage = message;
+
+    const newMessage = {
+      question: originalMessage,
+      response: "",
+      fromUser: true,
+    }; // Include both question and response in the message
     setConversation([...conversation, newMessage]);
 
-    const response = getAIResponse(message);
-    const newResponse = { text: response, fromUser: false };
+    const response = getAIResponse(originalMessage);
+
+    const newResponse = {
+      question: originalMessage,
+      response: response,
+      fromUser: false,
+    }; // Include both question and response in the message
     setConversation([...conversation, newResponse]);
+
     setMessage("");
   };
 
@@ -38,17 +51,27 @@ const ChatWindow = ({ onSaveConversation }) => {
       : "Sorry, I don't have a response for that.";
   };
 
+  const toggleMessageDetails = (index) => {
+    const updatedConversation = conversation.map((msg, i) => {
+      if (i === index) {
+        return { ...msg, showDetails: !msg.showDetails };
+      } else {
+        return msg;
+      }
+    });
+    setConversation(updatedConversation);
+  };
+
   return (
     <div className={styles.chatWindow}>
       <h2 className={styles.head}>BotAI</h2>
       <div className={styles.conversation}>
         {conversation.map((message, index) => (
-          <div
+          <Card
             key={index}
-            className={`message ${message.fromUser ? "user" : "ai"}`}
-          >
-            {message.text}
-          </div>
+            question={message.question} // Use message.question for the question
+            response={message.response}
+          />
         ))}
       </div>
       <div className={styles.questions}>
